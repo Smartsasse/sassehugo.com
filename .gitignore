@@ -1,0 +1,14 @@
+# Environment
+/public/.htaccess
+
+
+# Build
+/elm-stuff
+/node_modules
+/public/elm.js
+/public/elm.min.js
+
+# Operating systems and programs
+*~
+.DS_store
+Thumbs.db

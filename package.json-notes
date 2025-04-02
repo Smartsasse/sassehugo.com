@@ -1,0 +1,12 @@
+###
+### devDependencies
+###
+
+"elm": "^0.19.1-5"
+Info: Elm. Version: Latest. Added: 2025-04-02.
+
+"elm-live": "^4.0.2"
+Info: Binary to build (develop) with live reload. Version: Latest. Added: 2025-04-02.
+
+"uglify-js": "^3.19.3"
+Info: Minifying JavaScript for production. Version: Latest. Added: 2025-04-02.
