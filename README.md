@@ -1,7 +1,7 @@
 # sassehugo.com
 Source code for www.sassehugo.com.
 
-To be able to 404 non-existing routes I've chosen PHP.
+To be able to 404 non-existing routes I've chosen to use PHP.
 
 ## Setup
 `npm install`

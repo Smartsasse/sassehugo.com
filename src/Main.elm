@@ -5,6 +5,8 @@ import Browser.Navigation as Nav
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
+import Element.Font as Font
+import Element.Region
 import Html
 import Url
 import Url.Parser exposing ((</>), Parser, int, oneOf, s, string)
@@ -99,28 +101,49 @@ view : Model -> Browser.Document Msg
 view model =
     case model.page of
         Home ->
-            { title = "Home - Sasse Hugo"
-            , body =
-                [ Element.layout [] <|
-                    Element.column [ padding 20 ]
-                        [ h1 "Sasse"
-                        , text "This is Sasse, welcome!"
+            viewPage "Sasse" <|
+                defaultParagraphs
+                    []
+                    [ defaultParagraph
+                        [ text "This is Sasse, welcome!"
                         ]
-                ]
-            }
+                    ]
 
         NotFound ->
-            { title = "Not Found - Sasse Hugo"
-            , body =
-                [ Element.layout [] <|
-                    Element.column [ padding 20 ]
-                        [ h1 "Not Found"
-                        , text "The page you're looking for does not exist"
-                        ]
-                ]
-            }
+            viewPage "Not Found" (text "The page you're looking for does not exist")
+
+
+viewPage : String -> Element msg -> Browser.Document msg
+viewPage header content =
+    { title = defaultTitle header
+    , body =
+        [ Element.layout [] <|
+            Element.column [ padding 20, spacing 20 ]
+                [ h1AndContent header content ]
+        ]
+    }
+
+
+defaultTitle : String -> String
+defaultTitle title =
+    title ++ " - Sasse Hugo"
+
+
+defaultParagraphs : List (Element.Attribute msg) -> List (Element msg) -> Element msg
+defaultParagraphs attr paragraphs =
+    Element.column ([ spacing 20 ] ++ attr) paragraphs
+
+
+defaultParagraph : List (Element msg) -> Element msg
+defaultParagraph elements =
+    column [ spacing 6 ] elements
 
 
 h1 : String -> Element msg
 h1 text =
-    Element.html <| Html.h1 [] [ Html.text text ]
+    Element.el [ Element.Region.heading 1, Font.size 32, Font.bold ] <| Element.text text
+
+
+h1AndContent : String -> Element msg -> Element msg
+h1AndContent h1Text content =
+    column [ spacing 6 ] [ h1 h1Text, content ]

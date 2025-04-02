@@ -10,6 +10,13 @@ if ($requestUri !== '/') {
     $noindex = true;
 }
 
+$elmJsFilePath = 'elm.min.js';
+$elmJsTimeSuffix = '';
+if (file_exists($elmJsFilePath)) {
+    $elmJsFileLastEdit = filemtime($elmJsFilePath);
+    $elmJsTimeSuffix = sprintf('?time=%s', $elmJsFileLastEdit !== false ? $elmJsFileLastEdit : sprintf('error-%d', time()));
+}
+
 
 ?><!doctype html>
 <html lang="en">
@@ -18,7 +25,7 @@ if ($requestUri !== '/') {
     <meta charset="utf-8">
     <title>Sasse Hugo</title>
 
-    <script src="/elm.min.js"></script>
+    <script src="/elm.min.js<?php echo $elmJsTimeSuffix; ?>"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
